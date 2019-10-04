@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarSimulator.Domain;
+using System;
 using static System.Console;
 namespace CarSimulator
 {
@@ -7,6 +8,9 @@ namespace CarSimulator
         static void Main(string[] args)
         {
             bool exit = false;
+
+            Car[] carList = new Car[10];
+            uint carListIndex = 0;
 
             while (exit == false)
             {
@@ -31,10 +35,18 @@ namespace CarSimulator
                 {
                     case ConsoleKey.D1:
 
+                        Write("Brand: ");
+                        string brand = ReadLine();
+                        
+                        Write("Model: ");
+                        string model = ReadLine();
 
 
+                        Car newCar = new Car(brand, model);
+                        carList[carListIndex++] = newCar;
                         break;
 
+                      
                     case ConsoleKey.D2:
 
 
