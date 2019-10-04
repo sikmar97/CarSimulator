@@ -15,15 +15,15 @@ namespace CarSimulator
             while (exit == false)
             {
                 Clear();
-
+                CursorVisible = false;
                 SetCursorPosition(2, 1);
                 WriteLine("1. Add car");
                 SetCursorPosition(2, 2);
                 WriteLine("2. List cars");
                 SetCursorPosition(2, 3);
                 WriteLine("3. Simulate speed");
-                SetCursorPosition(2, 3);
-                WriteLine("3. Exit");
+                SetCursorPosition(2, 4);
+                WriteLine("4. Exit");
 
                 Console.CursorVisible = false;
 
@@ -34,7 +34,7 @@ namespace CarSimulator
                 switch (input.Key)
                 {
                     case ConsoleKey.D1:
-
+                        CursorVisible = true;
                         Write("Brand: ");
                         string brand = ReadLine();
                         
@@ -42,15 +42,46 @@ namespace CarSimulator
                         string model = ReadLine();
 
 
-                        Car newCar = new Car(brand, model);
+                        Write("NumberPlate: ");
+                        string numPlate = ReadLine();
+
+
+                        Car newCar = new Car(brand, model, numPlate);
                         carList[carListIndex++] = newCar;
                         break;
 
                       
                     case ConsoleKey.D2:
+                        WriteLine(" Brand         Model     Numplate     ");
+                        WriteLine("-----------------------------------------");
 
 
 
+
+                        foreach (Car car in carList)
+                        {
+
+
+                            if (car == null)
+                            {
+                                continue;
+                            }
+                            else
+                            {
+
+                                Console.WriteLine(" "+ car.Brand + "           " + car.Model+"        " + car.NumPlate);
+                            }
+                             
+
+                        }
+
+
+                        
+                        WriteLine("");
+                        CursorVisible = true;
+                        SetCursorPosition(1, 12);
+                        Write("<Press Any Key To Continue>");
+                        ReadKey();
                         break;
 
                     case ConsoleKey.D3:
@@ -58,7 +89,7 @@ namespace CarSimulator
 
 
                         break;
-                    case ConsoleKey.D:
+                    case ConsoleKey.D4:
 
                         exit = true;
 

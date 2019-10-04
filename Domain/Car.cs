@@ -6,14 +6,38 @@ namespace CarSimulator.Domain
 {
     class Car
     {
-        string brand;
-        string model;
+        private string brand;
+        private string model;
+        private string numPlate;
 
 
-        public Car (string brand, string model)
+        public Car (string brand, string model, string numPlate)
         {
             this.brand = brand;
             this.model = model;
+            this.numPlate = numPlate;
+        }
+
+        public string Brand
+        {
+            get
+            {
+                return brand;
+            }
+        }
+        public string Model
+        {
+            get
+            {
+                return model;
+            }
+        }
+        public string NumPlate
+        {
+            get
+            {
+                return numPlate;
+            }
         }
     }
 }
