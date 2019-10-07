@@ -1,15 +1,17 @@
 ﻿using CarSimulator.Domain;
 using System;
+using System.Threading;
 using static System.Console;
 namespace CarSimulator
 {
     class Program
     {
+       static Car[] carList = new Car[10];
         static void Main(string[] args)
         {
             bool exit = false;
 
-            Car[] carList = new Car[10];
+           
             uint carListIndex = 0;
 
             while (exit == false)
@@ -19,11 +21,13 @@ namespace CarSimulator
                 SetCursorPosition(2, 1);
                 WriteLine("1. Add car");
                 SetCursorPosition(2, 2);
-                WriteLine("2. List cars");
+                WriteLine("2. List cars");            
                 SetCursorPosition(2, 3);
-                WriteLine("3. Simulate speed");
+                WriteLine("3. Change Number Plate");
                 SetCursorPosition(2, 4);
-                WriteLine("4. Exit");
+                WriteLine("4. Simulate speed");
+                SetCursorPosition(2, 5);
+                WriteLine("5. Exit");
 
                 Console.CursorVisible = false;
 
@@ -42,7 +46,7 @@ namespace CarSimulator
                         string model = ReadLine();
 
 
-                        Write("NumberPlate: ");
+                        Write("Number Plate: ");
                         string numPlate = ReadLine();
 
 
@@ -52,7 +56,7 @@ namespace CarSimulator
 
                       
                     case ConsoleKey.D2:
-                        WriteLine(" Brand         Model     Numplate     ");
+                        WriteLine(" Brand         Model     Number Plate     ");
                         WriteLine("-----------------------------------------");
 
 
@@ -85,18 +89,56 @@ namespace CarSimulator
                         break;
 
                     case ConsoleKey.D3:
+                        {
 
+                            Write("Previous Number Plate: ");
+                            string previousNumPlate = ReadLine();
+                            Clear();
+                            Write("New Number Plate: ");
+                            string newNumPlate = ReadLine();
+                            Clear();
+                            Car theCar = SearchCarByRegistrationNumber(previousNumPlate);
+                            Clear();
+                            if (theCar != null)
+                            {
+                                theCar.SetNumPlate(newNumPlate);
+                            }
+                            else
+                            {
+                                WriteLine("Car not found");
+
+                                Thread.Sleep(2000);
+                            }
+                        }
 
 
                         break;
-                    case ConsoleKey.D4:
+                    case ConsoleKey.D5:
 
                         exit = true;
 
                         break;
                 }
             }
+            
+        }
+        private static Car SearchCarByRegistrationNumber(string previousRegistrationNumber)
+        {
+            Car carReferenceToReturn = null;
 
+            foreach (Car carReference in carList)
+            {
+                if (carReference == null) continue;
+
+                if (carReference.NumPlate == previousRegistrationNumber)
+                {
+                    carReferenceToReturn = carReference;
+                    break;
+                }
+            }
+
+            return carReferenceToReturn;
         }
     }
+
 }

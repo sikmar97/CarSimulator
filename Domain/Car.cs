@@ -34,10 +34,28 @@ namespace CarSimulator.Domain
         }
         public string NumPlate
         {
+            set
+            {
+                numPlate = value; 
+            }
             get
             {
                 return numPlate;
             }
         }
+
+
+        public void SetNumPlate(string value)
+        {
+            if (value.Length > 6)
+            {
+                numPlate = value.Substring(0, 6);
+            }
+            else
+            {
+                numPlate = value;
+            }
+        }
     }
 }
+   
